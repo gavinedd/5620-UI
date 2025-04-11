@@ -7,6 +7,12 @@ export interface Knot {
 
 export const knots: Knot[] = [
   {
+    id: 'half-knot',
+    name: 'Half Knot',
+    description: 'A simple binding knot that is the first step of the Square (Reef) Knot. It is a symmetrical knot that can bind when tied correctly.',
+    imageUrl: '/images/knots/halfknotR5.jpg',
+  },
+  {
     id: 'square-knot',
     name: 'Square Knot',
     description: 'A basic binding knot that is easy to tie and untie.',

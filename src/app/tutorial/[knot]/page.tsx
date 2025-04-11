@@ -1,8 +1,10 @@
 'use client';
 
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { knots } from '@/constant/knots';
 import { useState } from 'react';
+
+import { knots } from '@/constant/knots';
 
 interface TutorialPageProps {
   params: {
@@ -42,11 +44,13 @@ export default function TutorialPage({ params }: TutorialPageProps) {
 
         {/* Knot Diagram */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <div className="aspect-square bg-gray-200 rounded-md mb-4">
-            {/* Placeholder for knot diagram */}
-            <div className="w-full h-full flex items-center justify-center text-gray-400">
-              {knot.name} Diagram
-            </div>
+          <div className="aspect-square bg-gray-200 rounded-md mb-4 relative overflow-hidden">
+            <Image
+              src={knot.imageUrl}
+              alt={`${knot.name} diagram`}
+              fill
+              className="object-contain"
+            />
           </div>
           <p className="text-gray-600">{knot.description}</p>
         </div>

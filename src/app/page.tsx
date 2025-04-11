@@ -1,6 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
+
 import { knots } from '@/constant/knots';
 
 // !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
@@ -18,11 +20,14 @@ export default function Home() {
             href={`/tutorial/${knot.id}`}
             className="block p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
-            <div className="aspect-video bg-gray-200 rounded-md mb-4">
-              {/* Placeholder for knot image */}
-              <div className="w-full h-full flex items-center justify-center text-gray-400">
-                {knot.name}
-              </div>
+            <div className="aspect-video bg-gray-200 rounded-md mb-4 relative overflow-hidden">
+              <Image
+                src={knot.imageUrl}
+                alt={knot.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
             </div>
             <h2 className="text-xl font-semibold mb-2">{knot.name}</h2>
             <p className="text-gray-600">{knot.description}</p>
