@@ -131,12 +131,12 @@
             console.log('Initializing steps from API:', data);
             stageInfo = data.stage_info;
             
-            // Extract correct sequence (excluding error and wrong steps)
-            correctSequence = Object.keys(data.probabilities)
+            // Get the correct sequence from stage_info order
+            correctSequence = Object.keys(stageInfo)
                 .filter(key => !key.startsWith('error_') && !key.startsWith('wrong_'))
                 .sort((a, b) => {
-                    // Use the probabilities to determine order
-                    return data.probabilities[b] - data.probabilities[a];
+                    // Use the order from stage_info
+                    return stageInfo[a].order - stageInfo[b].order;
                 });
 
             console.log('Correct sequence:', correctSequence);
@@ -149,7 +149,7 @@
             
             stepsList.innerHTML = ''; // Clear existing steps
 
-            // Add only correct sequence steps
+            // Add steps in the correct order
             correctSequence.forEach(stepId => {
                 if (stageInfo[stepId]) {
                     const stepElement = createStepElement(stepId, stageInfo[stepId]);
@@ -191,6 +191,7 @@
                 
                 // Get the stage with highest probability
                 const currentStage = Object.entries(data.probabilities)
+                    .filter(([key]) => !key.startsWith('error_') && !key.startsWith('wrong_'))
                     .reduce((a, b) => a[1] > b[1] ? a : b)[0];
 
                 // Check if it's an error or wrong step
@@ -209,7 +210,7 @@
                         completedSteps.add(currentStep);
                         updateStepStyle(currentStep, 'completed');
                         
-                        // Move to next step
+                        // Move to next step in the predefined sequence
                         const currentIndex = correctSequence.indexOf(currentStep);
                         if (currentIndex < correctSequence.length - 1) {
                             currentStep = correctSequence[currentIndex + 1];
