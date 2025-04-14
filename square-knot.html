@@ -80,9 +80,31 @@
             const description = document.createElement('p');
             description.className = 'text-gray-600';
             description.textContent = stepInfo.description;
+
+            // Add manual validation button
+            const buttonDiv = document.createElement('div');
+            buttonDiv.className = 'mt-4 flex justify-end';
+            const nextButton = document.createElement('button');
+            nextButton.className = 'btn btn-primary btn-sm hidden';
+            nextButton.textContent = 'Next Step';
+            nextButton.onclick = () => {
+                if (!completedSteps.has(stepId)) {
+                    completedSteps.add(stepId);
+                    updateStepStyle(stepId, 'completed');
+                    
+                    // Move to next step in the predefined sequence
+                    const currentIndex = correctSequence.indexOf(stepId);
+                    if (currentIndex < correctSequence.length - 1) {
+                        currentStep = correctSequence[currentIndex + 1];
+                        updateStepStyle(currentStep, 'current');
+                    }
+                }
+            };
+            buttonDiv.appendChild(nextButton);
             
             div.appendChild(name);
             div.appendChild(description);
+            div.appendChild(buttonDiv);
             return div;
         }
 
@@ -99,11 +121,21 @@
             switch(status) {
                 case 'current':
                     stepElement.classList.add('bg-blue-100', 'border-blue-500');
+                    // Show the next button for the current step
+                    const nextButton = stepElement.querySelector('button');
+                    if (nextButton) {
+                        nextButton.classList.remove('hidden');
+                    }
                     // Scroll the current step into view
                     stepElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     break;
                 case 'completed':
                     stepElement.classList.add('bg-green-100', 'border-green-500');
+                    // Hide the next button for completed steps
+                    const completedButton = stepElement.querySelector('button');
+                    if (completedButton) {
+                        completedButton.classList.add('hidden');
+                    }
                     break;
             }
         }
