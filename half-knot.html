@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Half Knot Tutorial</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-base-200">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <a href="index.html" class="btn btn-ghost">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back
+            </a>
+            <h1 class="text-4xl font-bold text-center">Half Knot Tutorial</h1>
+            <div class="w-24"></div> <!-- Spacer for alignment -->
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Camera Feed -->
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">Live Camera Feed</h2>
+                    <div class="aspect-w-16 aspect-h-9">
+                        <img src="http://localhost:8000/stream" alt="Camera Feed" class="w-full h-full object-cover rounded-lg" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">Instructions</h2>
+                    <div class="prose">
+                        <ol class="list-decimal pl-5">
+                            <li class="mb-4">Hold one end of the rope in each hand.</li>
+                            <li class="mb-4">Cross the right end over the left end.</li>
+                            <li class="mb-4">Bring the right end under the left end.</li>
+                            <li class="mb-4">Pull both ends to tighten the knot.</li>
+                            <li class="mb-4">The knot should form a simple overhand loop.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
