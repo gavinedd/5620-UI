@@ -6,9 +6,10 @@
     <title>Half Knot Tutorial</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/src/style.css">
 </head>
 <body class="min-h-screen bg-base-200">
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-8 h-screen flex flex-col">
         <div class="flex justify-between items-center mb-8">
             <a href="index.html" class="btn btn-ghost">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -17,36 +18,248 @@
                 Back
             </a>
             <h1 class="text-4xl font-bold text-center">Half Knot Tutorial</h1>
-            <div class="w-24"></div> <!-- Spacer for alignment -->
+            <div class="w-24"></div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Camera Feed -->
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">Live Camera Feed</h2>
-                    <div class="aspect-w-16 aspect-h-9">
-                        <img src="http://localhost:8000/stream" alt="Camera Feed" class="w-full h-full object-cover rounded-lg" />
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 flex-1 min-h-0">
+            <!-- Left Column -->
+            <div class="space-y-8">
+                <!-- Camera Feed -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">Live Camera Feed</h2>
+                        <div class="aspect-w-16 aspect-h-9">
+                            <img src="http://localhost:8000/stream" alt="Camera Feed" class="w-full h-full object-cover rounded-lg" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error Box -->
+                <div id="error-box" class="card bg-error shadow-xl hidden">
+                    <div class="card-body">
+                        <h2 class="card-title text-error-content">Error Detected</h2>
+                        <div id="error-message" class="text-error-content">
+                            <!-- Error message will be displayed here -->
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Instructions -->
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">Instructions</h2>
-                    <div class="prose">
-                        <ol class="list-decimal pl-5">
-                            <li class="mb-4">Hold one end of the rope in each hand.</li>
-                            <li class="mb-4">Cross the right end over the left end.</li>
-                            <li class="mb-4">Bring the right end under the left end.</li>
-                            <li class="mb-4">Pull both ends to tighten the knot.</li>
-                            <li class="mb-4">The knot should form a simple overhand loop.</li>
-                        </ol>
+            <!-- Steps List -->
+            <div class="card bg-base-100 shadow-xl flex flex-col">
+                <div class="card-body flex flex-col h-full">
+                    <h2 class="card-title">Steps</h2>
+                    <div id="steps-list" class="space-y-4 overflow-y-auto flex-1 pr-2">
+                        <!-- Steps will be dynamically added here -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        let currentStep = 'start';
+        let consecutiveMatches = 0;
+        const requiredConsecutiveMatches = 3;
+        const completedSteps = new Set();
+        let stageInfo = {};
+        let correctSequence = [];
+        let currentError = null;
+
+        // Function to create a step element
+        function createStepElement(stepId, stepInfo) {
+            console.log('Creating step element:', stepId, stepInfo);
+            const div = document.createElement('div');
+            div.id = `step-${stepId}`;
+            div.className = 'p-4 rounded-lg border-2 border-gray-200';
+            
+            const name = document.createElement('h3');
+            name.className = 'font-bold text-lg';
+            name.textContent = stepInfo.name;
+            
+            const description = document.createElement('p');
+            description.className = 'text-gray-600';
+            description.textContent = stepInfo.description;
+
+            // Add manual validation button
+            const buttonDiv = document.createElement('div');
+            buttonDiv.className = 'mt-4 flex justify-end';
+            const nextButton = document.createElement('button');
+            nextButton.className = 'btn btn-primary btn-sm hidden';
+            nextButton.textContent = 'Next Step';
+            nextButton.onclick = () => {
+                if (!completedSteps.has(stepId)) {
+                    completedSteps.add(stepId);
+                    updateStepStyle(stepId, 'completed');
+                    
+                    // Move to next step in the predefined sequence
+                    const currentIndex = correctSequence.indexOf(stepId);
+                    if (currentIndex < correctSequence.length - 1) {
+                        currentStep = correctSequence[currentIndex + 1];
+                        updateStepStyle(currentStep, 'current');
+                    }
+                }
+            };
+            buttonDiv.appendChild(nextButton);
+            
+            div.appendChild(name);
+            div.appendChild(description);
+            div.appendChild(buttonDiv);
+            return div;
+        }
+
+        // Function to update step styling
+        function updateStepStyle(stepId, status) {
+            const stepElement = document.getElementById(`step-${stepId}`);
+            if (!stepElement) return;
+
+            // Reset all status classes
+            stepElement.classList.remove('bg-blue-100', 'border-blue-500', 
+                                      'bg-green-100', 'border-green-500');
+
+            // Add appropriate status classes
+            switch(status) {
+                case 'current':
+                    stepElement.classList.add('bg-blue-100', 'border-blue-500');
+                    // Show the next button for the current step
+                    const nextButton = stepElement.querySelector('button');
+                    if (nextButton) {
+                        nextButton.classList.remove('hidden');
+                    }
+                    // Scroll the current step into view
+                    stepElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    break;
+                case 'completed':
+                    stepElement.classList.add('bg-green-100', 'border-green-500');
+                    // Hide the next button for completed steps
+                    const completedButton = stepElement.querySelector('button');
+                    if (completedButton) {
+                        completedButton.classList.add('hidden');
+                    }
+                    break;
+            }
+        }
+
+        // Function to show error message
+        function showError(errorStep, errorInfo) {
+            const errorBox = document.getElementById('error-box');
+            const errorMessage = document.getElementById('error-message');
+            
+            if (errorStep !== currentError) {
+                currentError = errorStep;
+                errorMessage.textContent = errorInfo.description;
+                errorBox.classList.remove('hidden');
+                
+                // Hide error after 5 seconds
+                setTimeout(() => {
+                    errorBox.classList.add('hidden');
+                    currentError = null;
+                }, 5000);
+            }
+        }
+
+        // Function to initialize steps from API response
+        function initializeStepsFromAPI(data) {
+            console.log('Initializing steps from API:', data);
+            stageInfo = data.stage_info;
+            
+            // Get the correct sequence from stage_info order
+            correctSequence = Object.keys(stageInfo)
+                .filter(key => !key.startsWith('error_') && !key.startsWith('wrong_'))
+                .sort((a, b) => {
+                    // Use the order from stage_info
+                    return stageInfo[a].order - stageInfo[b].order;
+                });
+
+            console.log('Correct sequence:', correctSequence);
+
+            const stepsList = document.getElementById('steps-list');
+            if (!stepsList) {
+                console.error('Steps list element not found');
+                return;
+            }
+            
+            stepsList.innerHTML = ''; // Clear existing steps
+
+            // Add steps in the correct order
+            correctSequence.forEach(stepId => {
+                if (stageInfo[stepId]) {
+                    const stepElement = createStepElement(stepId, stageInfo[stepId]);
+                    stepsList.appendChild(stepElement);
+                } else {
+                    console.warn('Missing stage info for step:', stepId);
+                }
+            });
+
+            // Highlight the first step
+            if (correctSequence.length > 0) {
+                currentStep = correctSequence[0];
+                updateStepStyle(currentStep, 'current');
+            }
+        }
+
+        // Function to poll the classification API
+        async function pollClassification() {
+            try {
+                const response = await fetch('http://localhost:8000/classification', {
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    credentials: 'omit'
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log('Received API response:', data);
+                
+                // Initialize steps if not already done
+                if (Object.keys(stageInfo).length === 0) {
+                    initializeStepsFromAPI(data);
+                }
+                
+                // Get the stage with highest probability
+                const currentStage = Object.entries(data.probabilities)
+                    .filter(([key]) => !key.startsWith('error_') && !key.startsWith('wrong_'))
+                    .reduce((a, b) => a[1] > b[1] ? a : b)[0];
+
+                // Check if it's an error or wrong step
+                if (currentStage.startsWith('error_') || currentStage.startsWith('wrong_')) {
+                    if (consecutiveMatches >= requiredConsecutiveMatches) {
+                        showError(currentStage, stageInfo[currentStage]);
+                    }
+                    consecutiveMatches = 0;
+                    return;
+                }
+
+                // Check if it matches the current step
+                if (currentStage === currentStep) {
+                    consecutiveMatches++;
+                    if (consecutiveMatches >= requiredConsecutiveMatches && !completedSteps.has(currentStep)) {
+                        completedSteps.add(currentStep);
+                        updateStepStyle(currentStep, 'completed');
+                        
+                        // Move to next step in the predefined sequence
+                        const currentIndex = correctSequence.indexOf(currentStep);
+                        if (currentIndex < correctSequence.length - 1) {
+                            currentStep = correctSequence[currentIndex + 1];
+                            updateStepStyle(currentStep, 'current');
+                        }
+                    }
+                } else {
+                    consecutiveMatches = 0;
+                }
+            } catch (error) {
+                console.error('Error fetching classification:', error);
+            }
+        }
+
+        // Start polling
+        console.log('Starting polling...');
+        setInterval(pollClassification, 1000); // Poll every second
+    </script>
 </body>
 </html> 
