@@ -7,17 +7,21 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
-<body class="min-h-screen bg-base-200">
+<body class="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100">
     <div class="container mx-auto px-4 py-8 h-screen flex flex-col">
         <div class="flex justify-between items-center mb-8">
-            <a href="index.html" class="btn btn-ghost">
+            <a href="index.html" class="btn btn-ghost text-amber-900 hover:bg-amber-100">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
                 Back
             </a>
-            <h1 class="text-4xl font-bold text-center">Square Knot Tutorial</h1>
+            <div class="text-center">
+                <h1 class="text-5xl font-bold text-amber-900 mb-2 animate__animated animate__fadeIn">Square Knot Tutorial</h1>
+                <p class="text-xl text-amber-800">Follow the steps to master the square knot</p>
+            </div>
             <div class="w-24"></div>
         </div>
 
@@ -25,20 +29,32 @@
             <!-- Left Column -->
             <div class="space-y-8">
                 <!-- Camera Feed -->
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">Live Camera Feed</h2>
+                <div class="card bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-amber-800 rounded-lg overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-amber-800"></div>
+                    <div class="card-body p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                                <span class="text-2xl text-amber-800">📹</span>
+                            </div>
+                            <h2 class="card-title text-2xl text-amber-900">Live Camera Feed</h2>
+                        </div>
                         <div class="aspect-w-16 aspect-h-9">
-                            <img src="http://localhost:8000/stream" alt="Camera Feed" class="w-full h-full object-cover rounded-lg" />
+                            <img src="http://localhost:8000/stream" alt="Camera Feed" class="w-full h-full object-cover rounded-lg border-2 border-amber-200" />
                         </div>
                     </div>
                 </div>
 
                 <!-- Error Box -->
-                <div id="error-box" class="card bg-error shadow-xl hidden">
-                    <div class="card-body">
-                        <h2 class="card-title text-error-content">Error Detected</h2>
-                        <div id="error-message" class="text-error-content">
+                <div id="error-box" class="card bg-red-100 shadow-xl hidden border-2 border-red-500 rounded-lg overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-red-500"></div>
+                    <div class="card-body p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-red-200 flex items-center justify-center mr-4">
+                                <span class="text-2xl text-red-600">⚠️</span>
+                            </div>
+                            <h2 class="card-title text-2xl text-red-900">Error Detected</h2>
+                        </div>
+                        <div id="error-message" class="text-red-800">
                             <!-- Error message will be displayed here -->
                         </div>
                     </div>
@@ -46,9 +62,15 @@
             </div>
 
             <!-- Steps List -->
-            <div class="card bg-base-100 shadow-xl flex flex-col">
-                <div class="card-body flex flex-col h-full">
-                    <h2 class="card-title">Steps</h2>
+            <div class="card bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-amber-800 rounded-lg overflow-hidden flex flex-col">
+                <div class="absolute top-0 left-0 w-full h-2 bg-amber-800"></div>
+                <div class="card-body p-6 flex flex-col h-full">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                            <span class="text-2xl text-amber-800">📝</span>
+                        </div>
+                        <h2 class="card-title text-2xl text-amber-900">Steps</h2>
+                    </div>
                     <div id="steps-list" class="space-y-4 overflow-y-auto flex-1 pr-2">
                         <!-- Steps will be dynamically added here -->
                     </div>
@@ -71,21 +93,21 @@
             console.log('Creating step element:', stepId, stepInfo);
             const div = document.createElement('div');
             div.id = `step-${stepId}`;
-            div.className = 'p-4 rounded-lg border-2 border-gray-200';
+            div.className = 'p-6 rounded-lg border-2 border-amber-200 bg-white shadow-sm hover:shadow-md transition-all duration-300';
             
             const name = document.createElement('h3');
-            name.className = 'font-bold text-lg';
+            name.className = 'font-bold text-xl text-amber-900 mb-2';
             name.textContent = stepInfo.name;
             
             const description = document.createElement('p');
-            description.className = 'text-gray-600';
+            description.className = 'text-amber-800 mb-4';
             description.textContent = stepInfo.description;
 
             // Add manual validation button
             const buttonDiv = document.createElement('div');
             buttonDiv.className = 'mt-4 flex justify-end';
             const nextButton = document.createElement('button');
-            nextButton.className = 'btn btn-primary btn-sm hidden';
+            nextButton.className = 'btn btn-sm bg-amber-800 text-white hover:bg-amber-900 hidden';
             nextButton.textContent = 'Next Step';
             nextButton.onclick = () => {
                 if (!completedSteps.has(stepId)) {
@@ -115,12 +137,13 @@
 
             // Reset all status classes
             stepElement.classList.remove('bg-blue-100', 'border-blue-500', 
-                                      'bg-green-100', 'border-green-500');
+                                      'bg-green-100', 'border-green-500',
+                                      'ring-4', 'ring-blue-200');
 
             // Add appropriate status classes
             switch(status) {
                 case 'current':
-                    stepElement.classList.add('bg-blue-100', 'border-blue-500');
+                    stepElement.classList.add('bg-blue-100', 'border-blue-500', 'ring-4', 'ring-blue-200');
                     // Show the next button for the current step
                     const nextButton = stepElement.querySelector('button');
                     if (nextButton) {

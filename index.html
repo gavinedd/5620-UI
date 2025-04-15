@@ -7,33 +7,55 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
-<body class="min-h-screen bg-base-200">
+<body class="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-bold text-center mb-8">Knot Tying Tutor</h1>
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-amber-900 mb-4 animate__animated animate__fadeIn">Knot Tying Tutor</h1>
+            <p class="text-xl text-amber-800">Master the art of knot tying with interactive 3D tutorials</p>
+        </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Square Knot Tile -->
-            <a href="square-knot.html" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow" onclick="loadModel('square_knot')">
-                <div class="card-body">
-                    <h2 class="card-title">Square Knot</h2>
-                    <p>A basic and versatile knot used for joining two ropes of equal thickness.</p>
+            <a href="square-knot.html" class="card bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-amber-800 rounded-lg overflow-hidden" onclick="loadModel('square_knot')">
+                <div class="absolute top-0 left-0 w-full h-2 bg-amber-800"></div>
+                <div class="card-body p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                            <span class="text-2xl text-amber-800">🔗</span>
+                        </div>
+                        <h2 class="card-title text-2xl text-amber-900">Square Knot</h2>
+                    </div>
+                    <p class="text-amber-800">A basic and versatile knot used for joining two ropes of equal thickness.</p>
                 </div>
             </a>
 
             <!-- Half Knot Tile -->
-            <a href="half-knot.html" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow" onclick="loadModel('overhand_knot')">
-                <div class="card-body">
-                    <h2 class="card-title">Half Knot</h2>
-                    <p>A simple knot that forms the basis of many other knots.</p>
+            <a href="half-knot.html" class="card bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-amber-800 rounded-lg overflow-hidden" onclick="loadModel('overhand_knot')">
+                <div class="absolute top-0 left-0 w-full h-2 bg-amber-800"></div>
+                <div class="card-body p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                            <span class="text-2xl text-amber-800">🎀</span>
+                        </div>
+                        <h2 class="card-title text-2xl text-amber-900">Half Knot</h2>
+                    </div>
+                    <p class="text-amber-800">A simple knot that forms the basis of many other knots.</p>
                 </div>
             </a>
 
             <!-- Cleat Hitch Tile -->
-            <a href="cleat-hitch.html" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow" onclick="loadModel('cleat_hitch')">
-                <div class="card-body">
-                    <h2 class="card-title">Cleat Hitch</h2>
-                    <p>A secure knot used for tying a rope to a cleat, commonly used in boating.</p>
+            <a href="cleat-hitch.html" class="card bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-amber-800 rounded-lg overflow-hidden" onclick="loadModel('cleat_hitch')">
+                <div class="absolute top-0 left-0 w-full h-2 bg-amber-800"></div>
+                <div class="card-body p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                            <span class="text-2xl text-amber-800">⚓</span>
+                        </div>
+                        <h2 class="card-title text-2xl text-amber-900">Cleat Hitch</h2>
+                    </div>
+                    <p class="text-amber-800">A secure knot used for tying a rope to a cleat, commonly used in boating.</p>
                 </div>
             </a>
         </div>
