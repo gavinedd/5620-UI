@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overhand Knot Slideshow</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <a href="index.html" class="btn btn-ghost text-amber-900 hover:bg-amber-100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back
+            </a>
+            <div class="text-center">
+                <h1 class="text-5xl font-bold text-amber-900 mb-2 animate__animated animate__fadeIn">Overhand Knot Tutorial</h1>
+                <p class="text-xl text-amber-800">Follow these steps to tie a perfect overhand knot</p>
+            </div>
+            <div class="w-24"></div>
+        </div>
+
+        <div class="card bg-white shadow-xl border-2 border-amber-800 rounded-lg overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-amber-800"></div>
+            <div class="card-body p-6">
+                <div class="carousel w-full">
+                    <!-- Step 1 -->
+                    <div id="slide1" class="carousel-item relative w-full">
+                        <div class="w-full">
+                            <div class="flex flex-col items-center">
+                                <img src="images/overhand-knot/step1.png" class="max-w-2xl rounded-lg shadow-lg mb-4" alt="Step 1" />
+                                <div class="text-center">
+                                    <h3 class="text-2xl font-bold text-amber-900 mb-2">Step 1: Loose Rope</h3>
+                                    <p class="text-amber-800">Starting position with loose rope</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                            <a href="#slide4" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❮</a> 
+                            <a href="#slide2" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❯</a>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div id="slide2" class="carousel-item relative w-full">
+                        <div class="w-full">
+                            <div class="flex flex-col items-center">
+                                <img src="images/overhand-knot/step2.png" class="max-w-2xl rounded-lg shadow-lg mb-4" alt="Step 2" />
+                                <div class="text-center">
+                                    <h3 class="text-2xl font-bold text-amber-900 mb-2">Step 2: Cross the strands</h3>
+                                    <p class="text-amber-800">Cross the left strand over the right</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                            <a href="#slide1" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❮</a> 
+                            <a href="#slide3" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❯</a>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div id="slide3" class="carousel-item relative w-full">
+                        <div class="w-full">
+                            <div class="flex flex-col items-center">
+                                <img src="images/overhand-knot/step3.png" class="max-w-2xl rounded-lg shadow-lg mb-4" alt="Step 3" />
+                                <div class="text-center">
+                                    <h3 class="text-2xl font-bold text-amber-900 mb-2">Step 3: Pass Under</h3>
+                                    <p class="text-amber-800">Pass the left strand under the right</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                            <a href="#slide2" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❮</a> 
+                            <a href="#slide4" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❯</a>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div id="slide4" class="carousel-item relative w-full">
+                        <div class="w-full">
+                            <div class="flex flex-col items-center">
+                                <img src="images/overhand-knot/step4.png" class="max-w-2xl rounded-lg shadow-lg mb-4" alt="Step 4" />
+                                <div class="text-center">
+                                    <h3 class="text-2xl font-bold text-amber-900 mb-2">Step 4: Pull tight</h3>
+                                    <p class="text-amber-800">The knot has been tightened and is secure</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                            <a href="#slide3" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❮</a> 
+                            <a href="#slide1" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❯</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-6 space-x-4">
+                    <a href="overhand-knot.html" class="btn bg-amber-800 text-white hover:bg-amber-900">Try It Yourself</a>
+                    <a href="index.html" class="btn btn-ghost text-amber-900 hover:bg-amber-100">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

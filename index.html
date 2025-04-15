@@ -18,70 +18,172 @@
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Square Knot Tile -->
-            <a href="square-knot.html" class="card bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-amber-800 rounded-lg overflow-hidden" onclick="loadModel('square_knot')">
+            <div class="card bg-white shadow-xl border-2 border-amber-800 rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer" onclick="showKnotModal('square-knot')">
                 <div class="absolute top-0 left-0 w-full h-2 bg-amber-800"></div>
                 <div class="card-body p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
-                            <span class="text-2xl text-amber-800">🔗</span>
-                        </div>
-                        <h2 class="card-title text-2xl text-amber-900">Square Knot</h2>
+                    <div class="flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-amber-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                        </svg>
                     </div>
-                    <p class="text-amber-800">A basic and versatile knot used for joining two ropes of equal thickness.</p>
+                    <h2 class="card-title text-2xl font-bold text-amber-900 mb-2">Square Knot</h2>
+                    <p class="text-amber-800">A simple and secure knot for joining two ropes of equal thickness.</p>
                 </div>
-            </a>
+            </div>
 
-            <!-- Half Knot Tile -->
-            <a href="half-knot.html" class="card bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-amber-800 rounded-lg overflow-hidden" onclick="loadModel('overhand_knot')">
+            <!-- Overhand Knot Tile -->
+            <div class="card bg-white shadow-xl border-2 border-amber-800 rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer" onclick="showKnotModal('overhand-knot')">
                 <div class="absolute top-0 left-0 w-full h-2 bg-amber-800"></div>
                 <div class="card-body p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
-                            <span class="text-2xl text-amber-800">🎀</span>
-                        </div>
-                        <h2 class="card-title text-2xl text-amber-900">Half Knot</h2>
+                    <div class="flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-amber-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                        </svg>
                     </div>
-                    <p class="text-amber-800">A simple knot that forms the basis of many other knots.</p>
+                    <h2 class="card-title text-2xl font-bold text-amber-900 mb-2">Overhand Knot</h2>
+                    <p class="text-amber-800">The foundation for many other knots, perfect for beginners.</p>
                 </div>
-            </a>
+            </div>
 
             <!-- Cleat Hitch Tile -->
-            <a href="cleat-hitch.html" class="card bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-amber-800 rounded-lg overflow-hidden" onclick="loadModel('cleat_hitch')">
+            <div class="card bg-white shadow-xl border-2 border-amber-800 rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer" onclick="showKnotModal('cleat-hitch')">
                 <div class="absolute top-0 left-0 w-full h-2 bg-amber-800"></div>
                 <div class="card-body p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
-                            <span class="text-2xl text-amber-800">⚓</span>
-                        </div>
-                        <h2 class="card-title text-2xl text-amber-900">Cleat Hitch</h2>
+                    <div class="flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-amber-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                        </svg>
                     </div>
-                    <p class="text-amber-800">A secure knot used for tying a rope to a cleat, commonly used in boating.</p>
+                    <h2 class="card-title text-2xl font-bold text-amber-900 mb-2">Cleat Hitch</h2>
+                    <p class="text-amber-800">Essential for securing ropes to cleats, commonly used in boating.</p>
                 </div>
-            </a>
+            </div>
         </div>
     </div>
 
-    <script>
-        async function loadModel(knotType) {
-            try {
-                const response = await fetch('http://localhost:8000/settings', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        model_path: `models/${knotType}/best_model.pth`,
-                        knot_def_path: `knot_definitions/${knotType}.knot`
-                    })
-                });
+    <!-- Modal -->
+    <dialog id="knotModal" class="modal">
+        <div class="modal-box bg-white max-w-2xl">
+            <div class="absolute top-0 left-0 w-full h-2 bg-amber-800"></div>
+            <h3 class="font-bold text-3xl text-amber-900 mb-4" id="modalTitle"></h3>
+            <div class="space-y-6">
+                <!-- Option 1: Information -->
+                <div class="card bg-amber-50 border-2 border-amber-200 rounded-lg p-6 hover:shadow-md transition-all duration-300 cursor-pointer" onclick="showKnotInfo()">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                            <span class="text-2xl text-amber-800">ℹ️</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-amber-900">Learn About the Knot</h4>
+                            <p class="text-amber-800">Discover the history, uses, and importance of this knot</p>
+                        </div>
+                    </div>
+                </div>
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                console.log(`Successfully loaded ${knotType} model`);
-            } catch (error) {
-                console.error('Error loading model:', error);
+                <!-- Option 2: Slideshow -->
+                <div class="card bg-amber-50 border-2 border-amber-200 rounded-lg p-6 hover:shadow-md transition-all duration-300 cursor-pointer" onclick="showSlideshow()">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                            <span class="text-2xl text-amber-800">📽️</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-amber-900">Watch Tutorial</h4>
+                            <p class="text-amber-800">Follow along with our step-by-step slideshow guide</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Option 3: Try Yourself -->
+                <div class="card bg-amber-50 border-2 border-amber-200 rounded-lg p-6 hover:shadow-md transition-all duration-300 cursor-pointer" onclick="startTutorial()">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+                            <span class="text-2xl text-amber-800">🎯</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-amber-900">Try Yourself</h4>
+                            <p class="text-amber-800">Practice tying the knot with our interactive tutorial</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-action">
+                <button class="btn bg-amber-800 text-white hover:bg-amber-900" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        let currentKnot = '';
+        const knotInfo = {
+            'square-knot': {
+                title: 'Square Knot',
+                info: 'The square knot is one of the most fundamental and versatile knots. It is used for joining two ropes of equal thickness and is commonly used in sailing, camping, and first aid. The knot is easy to tie and untie, but it should not be used in critical applications as it can slip under load.',
+                slideshow: 'square-knot-slideshow.html',
+                tutorial: 'square-knot.html'
+            },
+            'overhand-knot': {
+                title: 'Overhand Knot',
+                info: 'The overhand knot is the simplest form of knot and forms the basis for many other knots. It is used as a stopper knot to prevent ropes from unraveling and is commonly used in rock climbing, sailing, and everyday applications.',
+                slideshow: 'overhand-knot-slideshow.html',
+                tutorial: 'overhand-knot.html'
+            },
+            'cleat-hitch': {
+                title: 'Cleat Hitch',
+                info: 'The cleat hitch is a secure knot used for tying a rope to a cleat, commonly found on boats and docks. It is essential for securing boats and is known for its ability to hold under tension while remaining easy to untie when needed.',
+                slideshow: 'cleat-hitch-slideshow.html',
+                tutorial: 'cleat-hitch.html'
             }
+        };
+
+        function showKnotModal(knotType) {
+            currentKnot = knotType;
+            
+            // Make POST request to update model settings
+            fetch('http://localhost:8000/settings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    model_path: `models/${knotType.replace('-', '_')}/best_model.pth`,
+                    knot_def_path: `knot_definitions/${knotType.replace('-', '_')}.knot`
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Model settings updated:', data);
+                // Show the modal after settings are updated
+                document.getElementById('knotModal').showModal();
+            })
+            .catch(error => {
+                console.error('Error updating model settings:', error);
+                alert('Error updating model settings. Please try again.');
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('knotModal').close();
+        }
+
+        function showKnotInfo() {
+            window.location.href = `knot-info.html?knot=${currentKnot}`;
+        }
+
+        function showSlideshow() {
+            closeModal();
+            // Navigate to slideshow page based on currentKnot
+            window.location.href = knotInfo[currentKnot].slideshow;
+        }
+
+        function startTutorial() {
+            closeModal();
+            // Navigate to tutorial page based on currentKnot
+            window.location.href = knotInfo[currentKnot].tutorial;
         }
     </script>
 </body>

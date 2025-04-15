@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knot Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <a href="index.html" class="btn btn-ghost text-amber-900 hover:bg-amber-100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back
+            </a>
+            <div class="text-center">
+                <h1 class="text-5xl font-bold text-amber-900 mb-2 animate__animated animate__fadeIn" id="knotTitle"></h1>
+                <p class="text-xl text-amber-800" id="knotSubtitle"></p>
+            </div>
+            <div class="w-24"></div>
+        </div>
+
+        <div class="card bg-white shadow-xl border-2 border-amber-800 rounded-lg overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-amber-800"></div>
+            <div class="card-body p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-amber-900 mb-4">About This Knot</h2>
+                            <p class="text-amber-800" id="knotDescription"></p>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-amber-900 mb-4">Common Uses</h2>
+                            <ul class="list-disc list-inside text-amber-800 space-y-2" id="knotUses"></ul>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-amber-900 mb-4">Tips & Tricks</h2>
+                            <ul class="list-disc list-inside text-amber-800 space-y-2" id="knotTips"></ul>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-amber-900 mb-4">Safety Notes</h2>
+                            <ul class="list-disc list-inside text-amber-800 space-y-2" id="knotSafety"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-8 space-x-4">
+                    <a href="#" id="tryButton" class="btn bg-amber-800 text-white hover:bg-amber-900">Try It Yourself</a>
+                    <a href="#" id="slideshowButton" class="btn bg-amber-800 text-white hover:bg-amber-900">View Tutorial</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get the knot type from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const knotType = urlParams.get('knot');
+
+        const knotInfo = {
+            'square-knot': {
+                title: 'Square Knot',
+                subtitle: 'A versatile knot for joining two ropes',
+                description: 'The square knot is one of the most fundamental and versatile knots. It is used for joining two ropes of equal thickness and is commonly used in sailing, camping, and first aid. The knot is easy to tie and untie, but it should not be used in critical applications as it can slip under load.',
+                uses: [
+                    'Joining two ropes of equal thickness',
+                    'First aid bandages',
+                    'Tying packages',
+                    'Sailing applications'
+                ],
+                tips: [
+                    'Make sure both ropes are of equal thickness',
+                    'Keep the knot flat and symmetrical',
+                    'Pull both ends evenly to tighten',
+                    'Add a safety knot for critical applications'
+                ],
+                safety: [
+                    'Not suitable for critical load-bearing applications',
+                    'Can slip under tension',
+                    'Should be backed up with additional knots for safety'
+                ],
+                tryLink: 'square-knot.html',
+                slideshowLink: 'square-knot-slideshow.html'
+            },
+            'overhand-knot': {
+                title: 'Overhand Knot',
+                subtitle: 'The simplest and most fundamental knot',
+                description: 'The overhand knot is the simplest form of knot and forms the basis for many other knots. It is used as a stopper knot to prevent ropes from unraveling and is commonly used in rock climbing, sailing, and everyday applications.',
+                uses: [
+                    'Stopper knot to prevent rope ends from fraying',
+                    'First step in many other knots',
+                    'Rock climbing safety',
+                    'Sailing applications'
+                ],
+                tips: [
+                    'Keep the knot tight and compact',
+                    'Leave enough tail for safety',
+                    'Can be tied with one hand in emergencies',
+                    'Practice tying it quickly and efficiently'
+                ],
+                safety: [
+                    'Always leave a sufficient tail',
+                    'Check the knot regularly in critical applications',
+                    'Can be difficult to untie after heavy loading'
+                ],
+                tryLink: 'overhand-knot.html',
+                slideshowLink: 'overhand-knot-slideshow.html'
+            },
+            'cleat-hitch': {
+                title: 'Cleat Hitch',
+                subtitle: 'Essential for securing boats and docks',
+                description: 'The cleat hitch is a secure knot used for tying a rope to a cleat, commonly found on boats and docks. It is essential for securing boats and is known for its ability to hold under tension while remaining easy to untie when needed.',
+                uses: [
+                    'Securing boats to docks',
+                    'Mooring lines',
+                    'Dock lines',
+                    'Towing applications'
+                ],
+                tips: [
+                    'Always make a complete turn around the base first',
+                    'Cross the rope over itself for better grip',
+                    'Finish with a locking turn',
+                    'Keep the rope neat and untangled'
+                ],
+                safety: [
+                    'Ensure the cleat is properly secured',
+                    'Check the knot regularly in changing conditions',
+                    'Use appropriate rope thickness for the cleat size',
+                    'Always have a backup plan for critical applications'
+                ],
+                tryLink: 'cleat-hitch.html',
+                slideshowLink: 'cleat-hitch-slideshow.html'
+            }
+        };
+
+        // Update the page content based on the knot type
+        if (knotType && knotInfo[knotType]) {
+            const info = knotInfo[knotType];
+            document.getElementById('knotTitle').textContent = info.title;
+            document.getElementById('knotSubtitle').textContent = info.subtitle;
+            document.getElementById('knotDescription').textContent = info.description;
+            
+            const usesList = document.getElementById('knotUses');
+            info.uses.forEach(use => {
+                const li = document.createElement('li');
+                li.textContent = use;
+                usesList.appendChild(li);
+            });
+
+            const tipsList = document.getElementById('knotTips');
+            info.tips.forEach(tip => {
+                const li = document.createElement('li');
+                li.textContent = tip;
+                tipsList.appendChild(li);
+            });
+
+            const safetyList = document.getElementById('knotSafety');
+            info.safety.forEach(note => {
+                const li = document.createElement('li');
+                li.textContent = note;
+                safetyList.appendChild(li);
+            });
+
+            document.getElementById('tryButton').href = info.tryLink;
+            document.getElementById('slideshowButton').href = info.slideshowLink;
+        } else {
+            // Redirect to home if no valid knot type
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html> 
