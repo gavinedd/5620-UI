@@ -145,17 +145,14 @@
             const errorBox = document.getElementById('error-box');
             const errorMessage = document.getElementById('error-message');
             
-            if (errorStep !== currentError) {
-                currentError = errorStep;
-                errorMessage.textContent = errorInfo.description;
-                errorBox.classList.remove('hidden');
-                
-                // Hide error after 5 seconds
-                setTimeout(() => {
-                    errorBox.classList.add('hidden');
-                    currentError = null;
-                }, 5000);
-            }
+            errorMessage.textContent = errorInfo.description;
+            errorBox.classList.remove('hidden');
+        }
+
+        // Function to hide error message
+        function hideError() {
+            const errorBox = document.getElementById('error-box');
+            errorBox.classList.add('hidden');
         }
 
         // Function to initialize steps from API response
@@ -228,9 +225,7 @@
 
                 // Check if it's an error or wrong step
                 if (currentStage.startsWith('error_') || currentStage.startsWith('wrong_')) {
-                    if (consecutiveMatches >= requiredConsecutiveMatches) {
-                        showError(currentStage, stageInfo[currentStage]);
-                    }
+                    showError(currentStage, stageInfo[currentStage]);
                     consecutiveMatches = 0;
                     return;
                 }
@@ -241,6 +236,7 @@
                     if (consecutiveMatches >= requiredConsecutiveMatches && !completedSteps.has(currentStep)) {
                         completedSteps.add(currentStep);
                         updateStepStyle(currentStep, 'completed');
+                        hideError(); // Hide error only when we complete a step
                         
                         // Move to next step in the predefined sequence
                         const currentIndex = correctSequence.indexOf(currentStep);
