@@ -12,9 +12,9 @@
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-4xl font-bold text-center mb-8">Knot Tying Tutor</h1>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Square Knot Tile -->
-            <a href="square-knot.html" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+            <a href="square-knot.html" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow" onclick="loadModel('square_knot')">
                 <div class="card-body">
                     <h2 class="card-title">Square Knot</h2>
                     <p>A basic and versatile knot used for joining two ropes of equal thickness.</p>
@@ -22,13 +22,45 @@
             </a>
 
             <!-- Half Knot Tile -->
-            <a href="half-knot.html" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+            <a href="half-knot.html" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow" onclick="loadModel('overhand_knot')">
                 <div class="card-body">
                     <h2 class="card-title">Half Knot</h2>
                     <p>A simple knot that forms the basis of many other knots.</p>
                 </div>
             </a>
+
+            <!-- Cleat Hitch Tile -->
+            <a href="cleat-hitch.html" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow" onclick="loadModel('cleat_hitch')">
+                <div class="card-body">
+                    <h2 class="card-title">Cleat Hitch</h2>
+                    <p>A secure knot used for tying a rope to a cleat, commonly used in boating.</p>
+                </div>
+            </a>
         </div>
     </div>
+
+    <script>
+        async function loadModel(knotType) {
+            try {
+                const response = await fetch('http://localhost:8000/settings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        model_path: `models/${knotType}/best_model.pth`,
+                        knot_def_path: `knot_definitions/${knotType}.knot`
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                console.log(`Successfully loaded ${knotType} model`);
+            } catch (error) {
+                console.error('Error loading model:', error);
+            }
+        }
+    </script>
 </body>
 </html>

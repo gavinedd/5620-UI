@@ -2,3 +2,12 @@ node_modules
 package-lock.json
 
 output.css
+
+# Next.js
+.next/
+.next/cache/
+.next/types/
+.next/static/
+.next/server/
+.next/trace
+next-env.d.ts
