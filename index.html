@@ -129,6 +129,13 @@
             }
         };
 
+        // Check for knot parameter in URL and open modal if present
+        const urlParams = new URLSearchParams(window.location.search);
+        const knotParam = urlParams.get('knot');
+        if (knotParam && knotInfo[knotParam]) {
+            showKnotModal(knotParam);
+        }
+
         function showKnotModal(knotType) {
             currentKnot = knotType;
             

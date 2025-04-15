@@ -51,9 +51,8 @@
                     </div>
                 </div>
 
-                <div class="flex justify-center mt-8 space-x-4">
-                    <a href="#" id="tryButton" class="btn bg-amber-800 text-white hover:bg-amber-900">Try It Yourself</a>
-                    <a href="#" id="slideshowButton" class="btn bg-amber-800 text-white hover:bg-amber-900">View Tutorial</a>
+                <div class="flex justify-center mt-8">
+                    <a href="#" id="backButton" class="btn bg-amber-800 text-white hover:bg-amber-900">Back to Main Page</a>
                 </div>
             </div>
         </div>
@@ -168,8 +167,11 @@
                 safetyList.appendChild(li);
             });
 
-            document.getElementById('tryButton').href = info.tryLink;
-            document.getElementById('slideshowButton').href = info.slideshowLink;
+            // Set up the back button to return to main page and reopen modal
+            document.getElementById('backButton').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = `index.html?knot=${knotType}`;
+            });
         } else {
             // Redirect to home if no valid knot type
             window.location.href = 'index.html';
