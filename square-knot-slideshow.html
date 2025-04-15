@@ -40,8 +40,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#slide7" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❮</a> 
+                        <div class="absolute flex justify-end transform -translate-y-1/2 right-5 top-1/2">
                             <a href="#slide2" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❯</a>
                         </div>
                     </div>
@@ -144,7 +143,6 @@
                         </div>
                         <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                             <a href="#slide6" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❮</a> 
-                            <a href="#slide1" class="btn btn-circle bg-amber-800 text-white hover:bg-amber-900">❯</a>
                         </div>
                     </div>
                 </div>
@@ -156,5 +154,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function updateStepStyle() {
+            // Reset all steps
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('bg-green-100', 'border-green-500', 'bg-blue-100', 'border-blue-500', 'ring-4', 'ring-blue-200');
+            });
+
+            // Style completed steps
+            for (let i = 0; i < currentStep; i++) {
+                const step = document.getElementById(`step${i + 1}`);
+                step.classList.add('bg-green-100', 'border-green-500');
+            }
+
+            // Style current step
+            const currentStepElement = document.getElementById(`step${currentStep + 1}`);
+            currentStepElement.classList.add('bg-blue-100', 'border-blue-500', 'ring-4', 'ring-blue-200');
+
+            // Update navigation buttons
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            
+            prevButton.disabled = currentStep === 0;
+            nextButton.style.display = currentStep === steps.length - 1 ? 'none' : 'block';
+        }
+    </script>
 </body>
 </html> 
