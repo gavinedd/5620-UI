@@ -241,17 +241,22 @@
                     initializeStepsFromAPI(data);
                 }
                 
-                // Get the stage with highest probability
-                const currentStage = Object.entries(data.probabilities)
-                    .filter(([key]) => !key.startsWith('error_') && !key.startsWith('wrong_'))
-                    .reduce((a, b) => a[1] > b[1] ? a : b)[0];
+                // First check for error or wrong steps
+                const errorStage = Object.entries(data.probabilities)
+                    .filter(([key]) => key.startsWith('error_') || key.startsWith('wrong_'))
+                    .reduce((a, b) => a[1] > b[1] ? a : b, [null, 0]);
 
-                // Check if it's an error or wrong step
-                if (currentStage.startsWith('error_') || currentStage.startsWith('wrong_')) {
-                    showError(currentStage, stageInfo[currentStage]);
+                // If we have a high probability error or wrong step, show it
+                if (errorStage[0] && errorStage[1] > 0.5) {  // Threshold of 0.5
+                    showError(errorStage[0], stageInfo[errorStage[0]]);
                     consecutiveMatches = 0;
                     return;
                 }
+
+                // Get the stage with highest probability (excluding errors)
+                const currentStage = Object.entries(data.probabilities)
+                    .filter(([key]) => !key.startsWith('error_') && !key.startsWith('wrong_'))
+                    .reduce((a, b) => a[1] > b[1] ? a : b)[0];
 
                 // Check if it matches the current step
                 if (currentStage === currentStep) {
@@ -259,7 +264,6 @@
                     if (consecutiveMatches >= requiredConsecutiveMatches && !completedSteps.has(currentStep)) {
                         completedSteps.add(currentStep);
                         updateStepStyle(currentStep, 'completed');
-                        hideError(); // Hide error only when we complete a step
                         
                         // Move to next step in the predefined sequence
                         const currentIndex = correctSequence.indexOf(currentStep);
