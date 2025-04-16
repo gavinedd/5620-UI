@@ -246,16 +246,12 @@
                     .filter(([key]) => key.startsWith('error_') || key.startsWith('wrong_'))
                     .reduce((a, b) => a[1] > b[1] ? a : b, [null, 0]);
 
-                // If we have a high probability error or wrong step, show it and reset progress
+                // If we have a high probability error or wrong step, show it
                 if (errorStage[0] && errorStage[1] > 0.5) {  // Threshold of 0.5
                     showError(errorStage[0], stageInfo[errorStage[0]]);
                     consecutiveMatches = 0;
-                    // Don't proceed with step validation when there's an error
                     return;
                 }
-
-                // Only proceed with step validation if there are no errors
-                hideError(); // Hide any previous errors
                 
                 // Get the stage with highest probability (excluding errors)
                 const currentStage = Object.entries(data.probabilities)
@@ -268,6 +264,7 @@
                     if (consecutiveMatches >= requiredConsecutiveMatches && !completedSteps.has(currentStep)) {
                         completedSteps.add(currentStep);
                         updateStepStyle(currentStep, 'completed');
+                        hideError(); // Only hide error when we complete a step
                         
                         // Move to next step in the predefined sequence
                         const currentIndex = correctSequence.indexOf(currentStep);
