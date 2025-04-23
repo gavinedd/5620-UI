@@ -1,22 +1,51 @@
-## TailwindCSS + DaisyUI boilerplate ##
-#### Using TailwindCSS JIT ####
-##### With `autoprefixer` and `cssnano` for production #####
+# Knot Classification UI
 
-Demo: [https://daisyui-starter.netlify.app/](https://daisyui-starter.netlify.app/)
+A modern web interface for the knot classification system, built with Node.js, Vite, TailwindCSS, and DaisyUI.
 
-[![Deploy](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/saadeghi/daisyui-starter)  
+## Features
 
----
+- Real-time camera feed display
+- Knot stage visualization
+- Classification results display
+- Interactive controls
+- Responsive design
 
-1. Clone the project
-2. Install:
+## Prerequisites
+
+- Node.js (for npm package management)
+- npm (Node Package Manager)
+
+## Setup
+
+1. Install dependencies using npm:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+The UI will be available at http://localhost:3000
+
+## Development
+
+- Built with Node.js and Vite
+- Styled with TailwindCSS and DaisyUI
+- Connects to the backend API on port 8000
+
+## Building for Production
+
+To create a production build:
+```bash
+npm run build
 ```
-npm install
-```
-3. Generate CSS with:
-```
-npm run dev
-```
-```
-npm run prod
-```
+
+The built files will be in the `dist` directory.
+
+## Notes
+
+- The UI automatically connects to the backend API on port 8000
+- Make sure the backend is running before starting the UI
+- The UI requires a modern web browser with WebSocket support
